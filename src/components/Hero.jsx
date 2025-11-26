@@ -1,7 +1,11 @@
 import { motion as Motion } from "framer-motion";
+import BlurText from "./BlurText";
 import videoSrc from "../assets/video.mp4";
 export default function Hero() {
   const msg = encodeURIComponent("Hi, I’d like to book a trip!");
+  const handleBlurComplete = () => {
+    console.log('Blur animation complete');
+  };
 
   return (
     <section className="relative w-full h-screen" id="home">
@@ -40,24 +44,34 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col h-full items-center justify-center text-center px-6 text-white">
-        <Motion.h1
+       <div className="relative z-10 flex flex-col h-full items-center justify-center text-center px-6 text-white">
+        {/* <Motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-6xl font-bold"
         >
           Explore Kodaikanal With Us
-        </Motion.h1>
+        </Motion.h1>  */}
+        <BlurText
+          text="Explore Kodaikanal With Us"
+          delay={150}
+          animateBy="words"
+          direction="top"
+          onAnimationComplete={handleBlurComplete}
+          className="text-4xl md:text-6xl font-bold"
+        />
 
-        <Motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+       
+         
+        <BlurText
+          text="Premium trips • Cozy stays • Hassle-free experience"
+          delay={150}
+          animateBy="words"
+          direction="top"
+          onAnimationComplete={handleBlurComplete}
           className="mt-4 text-lg md:text-2xl max-w-xl"
-        >
-          Premium trips • Cozy stays • Hassle-free experience
-        </Motion.p>
+        />
 
         <Motion.div
           className="mt-6 flex gap-4"
