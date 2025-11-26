@@ -1,18 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import { motion as Motion, AnimatePresence } from "framer-motion";
-
+import img_1 from "../assets/1.jpg"
+import img_2 from "../assets/2.jpg"
+import img_3 from "../assets/3.jpg"
+import img_4 from "../assets/4.jpg"
+import img_5 from "../assets/5.jpg"
+import img_6 from "../assets/6.jpg"
+import img_car from "../assets/car.jpeg"
 export default function Gallery() {
-  // Use Vite's base URL so paths work correctly when hosted under a subpath
-  const base = import.meta.env.BASE_URL || "/";
+  // Use Vite's base URL in production, '/' in dev
   const images = [
-    "gallery/1.jpg",
-    "gallery/2.jpg",
-    "gallery/3.jpg",
-    "gallery/4.jpg",
-    "gallery/5.jpg",
-    "gallery/6.jpg",
-    "gallery/car.jpeg"
-  ].map((p) => (p.startsWith("/") ? base + p.slice(1) : base + p));
+    img_1,
+    img_2,
+    img_3,
+    img_4,
+    img_5,
+    img_6,
+    img_car,
+  ]
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const intervalRef = useRef(null);
