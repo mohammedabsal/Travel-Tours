@@ -68,7 +68,10 @@ export default function Testimonials() {
           <style>{`
             .marquee-wrap{ --gap: 1rem; }
             .marquee-track{ display:flex; gap:var(--gap); align-items:stretch; width:max-content; }
-            .marquee-item{ min-width:320px; max-width:520px; flex:0 0 auto; }
+            .marquee-item{ min-width:240px; max-width:520px; flex:0 0 auto; }
+            @media (min-width: 640px) {
+              .marquee-item{ min-width:320px; }
+            }
             .marquee-card{ background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(236,253,245,0.6)); padding:1.25rem; border-radius:12px; box-shadow:0 12px 30px rgba(16,185,129,0.06); }
             @keyframes marqueeAnim{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
             .marquee-track{ animation: marqueeAnim ${duration}s linear infinite; }

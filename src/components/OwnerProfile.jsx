@@ -3,7 +3,7 @@ import { FaWhatsapp, FaMobileAlt } from "react-icons/fa";
 import profile from "../assets/car.jpeg";
 export default function OwnerProfile() {
   return (
-    <section id="owner" className="py-20 bg-gradient-to-r from-emerald-50 to-white">
+    <section id="owner" className="py-20 bg-gradient-to-r from-emerald-50 to-white relative z-10">
       <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center gap-8">
         <Motion.img
           src={profile}

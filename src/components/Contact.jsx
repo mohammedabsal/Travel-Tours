@@ -18,7 +18,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-r from-emerald-900 to-teal-800 text-emerald-50">
+    <section id="contact" className="py-20 bg-gradient-to-r from-emerald-900 to-teal-800 text-emerald-50 relative z-10">
       <div className="max-w-4xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Contact Us</h2>
 
@@ -66,17 +66,17 @@ export default function Contact() {
                 />
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   type="submit"
-                  className="px-6 py-3 rounded-lg font-semibold text-white focus:outline-none transform transition-all duration-200 bg-gradient-to-r from-primary to-accent hover:scale-105 hover:brightness-95"
+                  className="px-6 py-3 rounded-lg font-semibold text-white focus:outline-none transform transition-all duration-200 bg-gradient-to-r from-primary to-accent hover:scale-105 hover:brightness-95 w-full sm:w-auto text-center"
                 >
                   Send
                 </button>
 
                 <a
                   href="https://wa.me/919080806831?text=Hi%20I%20am%20interested%20in%20your%20tours"
-                  className="inline-block px-6 py-3 rounded-lg font-semibold text-white transform transition-all duration-200 bg-gradient-to-r from-emerald-400 to-emerald-600 hover:scale-105"
+                  className="inline-block px-6 py-3 rounded-lg font-semibold text-white transform transition-all duration-200 bg-gradient-to-r from-emerald-400 to-emerald-600 hover:scale-105 w-full sm:w-auto text-center"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -8,6 +8,7 @@ import mforest from "../assets/mforest.jpg";
 import oldtreeImg from "../assets/oldtree.jpg";
 
 export default function Packages() {
+
   const tours = [
     {
       id: 1,
@@ -106,7 +107,7 @@ export default function Packages() {
   }, []);
 
   return (
-    <section id="packages" className="py-20 relative">
+    <section id="packages" className="py-20 relative z-10">
       {/* ======== STYLES ======== */}
       <style>{`
         .pkg-bg {
@@ -292,12 +293,12 @@ export default function Packages() {
                     ))}
                   </ul>
 
-                  <div className="mt-5 flex gap-3">
+                  <div className="mt-5 flex flex-col sm:flex-row gap-3">
                     <a
                       href={`https://wa.me/919080806831?text=${encodeURIComponent(
                         "I'm interested in " + t.name
                       )}`}
-                      className="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:brightness-110 transition"
+                      className="bg-emerald-600 text-white px-4 py-2 rounded-lg shadow hover:brightness-110 transition w-full sm:w-auto text-center"
                     >
                       Book Now
                     </a>
@@ -305,7 +306,7 @@ export default function Packages() {
                     <a
                       href="#owner"
                       onClick={(e) => smoothScroll(e, "owner")}
-                      className="border border-emerald-600 text-emerald-700 px-4 py-2 rounded-lg hover:bg-emerald-50 transition"
+                      className="border border-emerald-600 text-emerald-700 px-4 py-2 rounded-lg hover:bg-emerald-50 transition w-full sm:w-auto text-center"
                     >
                       Enquire
                     </a>

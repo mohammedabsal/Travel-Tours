@@ -146,6 +146,28 @@ export default function Services() {
 
         /* Make header strip slightly transparent so glass shows through */
         .svc-strip{ background: rgba(255,255,255,0.06); }
+
+        /* Mobile performance: reduce heavy effects on small screens */
+        @media (max-width: 640px) {
+          .svc-card{
+            background: rgba(255,255,255,0.06);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: none;
+            transition: transform .12s ease, box-shadow .12s ease;
+          }
+
+          .svc-card::after{ display: none; }
+
+          .svc-card:hover, .svc-card:focus-within{
+            transform: none;
+            border-color: rgba(255,255,255,0.06);
+            box-shadow: none;
+          }
+
+          .svc-card:hover::after, .svc-card:focus-within::after{ animation: none; }
+        }
       `}</style>
 
       <section id="services" className="py-20 services-bg">
@@ -188,12 +210,12 @@ export default function Services() {
                     </div>
                   </div>
 
-                  <div className="mt-6 flex items-end justify-between gap-4">
+                  <div className="mt-6 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4">
                     <span className="inline-block text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-md">{item.tag}</span>
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                       <button
                         onClick={(e) => { e.stopPropagation(); window.location.href = `https://wa.me/919080806831?text=Hi%20I%20am%20interested%20in%20${encodeURIComponent(item.title)}`; }}
-                        className="inline-flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                        className="inline-flex items-center justify-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-300 w-full sm:w-auto"
                         aria-label={`Book ${item.title}`}
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5c-1.3-1.3-3-1.7-4.6-1.3-2.7.7-5.4 1.6-7.9 3.1-1.7 1-3.3 2.2-4.8 3.6-1.5 1.5-2.7 3-3.7 4.7-.5 1.1-.1 2.3.9 3.3l2.3 2.3c.9.9 2.1 1.2 3.3.8 1.7-.6 3.4-1.5 5-2.6 1.8-1.2 3.4-2.6 5-4.3 2.1-2.2 3.3-4.8 3.7-7.5.3-1.5 0-3.2-1.3-4.5z"/></svg>
@@ -201,7 +223,7 @@ export default function Services() {
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); openModal(item); }}
-                        className="inline-block border border-emerald-600 text-emerald-600 px-4 py-2 rounded-lg hover:bg-emerald-50 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                        className="inline-block border border-emerald-600 text-emerald-600 px-4 py-2 rounded-lg hover:bg-emerald-50 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-200 w-full sm:w-auto"
                         aria-label={`More details about ${item.title}`}
                       >
                         Details

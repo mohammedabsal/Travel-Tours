@@ -1,60 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 import { motion as Motion, AnimatePresence } from "framer-motion";
-import img_1 from "../assets/1.jpg"
-import img_2 from "../assets/2.jpg"
-import img_3 from "../assets/3.jpg"
-import img_4 from "../assets/4.jpg"
-import img_5 from "../assets/5.jpg"
-import img_6 from "../assets/6.jpg"
-import img_car from "../assets/car.jpeg"
+import img_1 from "../assets/1.jpg";
+import img_2 from "../assets/2.jpg";
+import img_3 from "../assets/3.jpg";
+import img_4 from "../assets/4.jpg";
+import img_5 from "../assets/5.jpg";
+import img_6 from "../assets/6.jpg";
+import img_car from "../assets/car.jpeg";
+
 export default function Gallery() {
-  // Use Vite's base URL in production, '/' in dev
-  const images = [
-    img_1,
-    img_2,
-    img_3,
-    img_4,
-    img_5,
-    img_6,
-    img_car,
-  ]
+  const images = [img_1, img_2, img_3, img_4, img_5, img_6, img_car];
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const intervalRef = useRef(null);
 
-  // navigation helpers (declared before keyboard handler to avoid use-before-define)
-  function next() {
-    setIndex((i) => (i + 1) % images.length);
-  }
-
-  function prev() {
-    setIndex((i) => (i - 1 + images.length) % images.length);
-  }
+  const next = () => setIndex((i) => (i + 1) % images.length);
+  const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
 
   useEffect(() => {
-    const keyHandler = (e) => {
-      if (e.key === "ArrowRight" || e.code === "ArrowRight") next();
-      if (e.key === "ArrowLeft" || e.code === "ArrowLeft") prev();
-      if (e.code === "Space" || e.key === " ") setPaused((p) => !p);
-    };
-    window.addEventListener("keydown", keyHandler);
-    return () => window.removeEventListener("keydown", keyHandler);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // autoplay effect: start/stop interval based on `paused`
-  useEffect(() => {
-    // clear any existing interval
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-
     if (!paused) {
       intervalRef.current = setInterval(() => {
         setIndex((i) => (i + 1) % images.length);
       }, 4000);
     }
-
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -64,11 +32,11 @@ export default function Gallery() {
   }, [paused, images.length]);
 
   return (
-    <section id="gallery" className="relative w-full h-screen bg-gradient-to-b from-emerald-50 to-emerald-100">
+    <section id="gallery" className="relative w-full h-[60vh] sm:h-screen bg-emerald-100 z-10">
+
+      {/* Fullscreen overlay – pointer-events disabled */}
       <div
-        className="absolute inset-0 flex items-center justify-center"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        className="absolute inset-0 pointer-events-none"
         onTouchStart={() => setPaused(true)}
         onTouchEnd={() => setPaused(false)}
       >
@@ -76,52 +44,28 @@ export default function Gallery() {
           <Motion.img
             key={index}
             src={images[index]}
-            alt={`Gallery ${index + 1}`}
-            className="object-cover w-full h-full"
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.9 }}
-            draggable={false}
+            className="w-full h-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           />
         </AnimatePresence>
-
-        {/* Left / Right Controls */}
-        <button
-          onClick={(e) => { e.stopPropagation(); prev(); }}
-          aria-label="Previous"
-          className="absolute left-6 z-20 rounded-full bg-black/40 text-white p-3 hover:bg-black/60"
-        >
-          ‹
-        </button>
-
-        <button
-          onClick={(e) => { e.stopPropagation(); next(); }}
-          aria-label="Next"
-          className="absolute right-6 z-20 rounded-full bg-black/40 text-white p-3 hover:bg-black/60"
-        >
-          ›
-        </button>
-
-        {/* Bottom dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={(e) => { e.stopPropagation(); setIndex(i); }}
-              className={`h-3 w-8 rounded-full ${i === index ? 'bg-emerald-600' : 'bg-white/60'}`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
       </div>
 
-      {/* Header overlay with title */}
-      <div className="absolute top-8 left-0 right-0 z-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-emerald-50 drop-shadow-lg">Gallery</h2>
-        </div>
-      </div>
+      {/* Buttons must re-enable pointer events */}
+      <button
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white p-2 rounded pointer-events-auto"
+        onClick={prev}
+      >
+        ‹
+      </button>
+
+      <button
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white p-2 rounded pointer-events-auto"
+        onClick={next}
+      >
+        ›
+      </button>
     </section>
   );
 }

@@ -2,7 +2,8 @@ import { motion as Motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <Motion.footer
+    <footer className="relative z-10">
+      <Motion.footer
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -19,6 +20,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </Motion.footer>
+      </Motion.footer>
+    </footer>
   );
 }
