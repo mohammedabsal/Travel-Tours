@@ -9,24 +9,33 @@ export default function Navbar() {
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   e.preventDefault();
 
-  // CLOSE MENU FIRST (so mobile Safari doesn’t block scrolling)
   setOpen(false);
 
-  // WAIT for the menu to collapse (Framer Motion needs ~250–300ms)
   setTimeout(() => {
     const el = document.getElementById(id);
     const navEl = document.querySelector("nav");
-
+    
     const header = navEl?.querySelector(".header-bar");
     const navHeight = header ? header.offsetHeight : 70;
 
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 8;
-      window.scrollTo({ top, behavior: "smooth" });
-      history.replaceState(null, "", "#" + id);
-    }
-  }, 300); // ← THE MAGIC FIX
+    if (!el) return;
+    
+    // TEMPORARY jump to correct offset without animation
+    window.scrollTo({ top: window.scrollY - 1 });
+
+    // SMOOTHEST MOBILE ANIMATION
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // FIX: ensure correct offset after smooth scroll
+    setTimeout(() => {
+      const finalTop = el.getBoundingClientRect().top + window.scrollY - navHeight - 8;
+      window.scrollTo({ top: finalTop, behavior: "smooth" });
+    }, 350);
+
+    history.replaceState(null, "", "#" + id);
+  }, 300);
 }
+
 
   useEffect(() => {
     const handler = () => setScroll(window.scrollY > 5);
