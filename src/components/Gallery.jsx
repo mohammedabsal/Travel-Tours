@@ -8,8 +8,9 @@ import img_5 from "../assets/5.jpg";
 import img_6 from "../assets/6.jpg";
 import img_car from "../assets/car.jpeg";
 
+const images = [img_1, img_2, img_3, img_4, img_5, img_6, img_car];
+
 export default function Gallery() {
-  const images = [img_1, img_2, img_3, img_4, img_5, img_6, img_car];
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const intervalRef = useRef(null);
@@ -29,7 +30,15 @@ export default function Gallery() {
         intervalRef.current = null;
       }
     };
-  }, [paused, images.length]);
+  }, [paused]);
+
+  // Preload images to avoid flicker when transitioning
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   return (
     <section id="gallery" className="relative w-full h-[60vh] sm:h-screen bg-emerald-100 z-10">
@@ -44,7 +53,10 @@ export default function Gallery() {
           <Motion.img
             key={index}
             src={images[index]}
-            className="w-full h-full object-cover"
+              className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+              style={{ willChange: "opacity, transform" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
