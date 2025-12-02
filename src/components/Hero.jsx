@@ -30,8 +30,8 @@ export default function Hero() {
     { filter: 'blur(0px)', opacity: 1, y: 0 }
   ], []);
 
-  const stepCount = defaultTo.length + 1;
-  const times = Array.from({ length: stepCount }, (_, i) => i / (stepCount - 1));
+  // const stepCount = defaultTo.length + 1;
+  // const times = Array.from({ length: stepCount }, (_, i) => i / (stepCount - 1));
 
   return (
     <section id="home" className="relative w-full h-screen overflow-hidden z-10">

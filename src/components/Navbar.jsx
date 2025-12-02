@@ -81,11 +81,15 @@ export default function Navbar() {
         `}</style>
 
         {/* HEADER BAR */}
-        <div className="header-bar flex items-center justify-between w-full py-3 text-emerald-50">
+        <div className="header-bar flex items-center justify-between w-full py-3 text-emerald-50"
+        >
+          <div className="flex items-center gap-3 cursor-pointer">
+          <img src="./public/favicon.svg" alt="Aslam Holidays Logo" className="w-10 h-10" />
           <h1 className="text-lg font-bold tracking-tight bg-clip-text text-transparent 
             bg-gradient-to-r from-emerald-300 via-emerald-500 to-emerald-200">
             Aslam Holidays
           </h1>
+          </div>
 
           {/* DESKTOP LINKS */}
           <div className="hidden md:flex gap-6 items-center">
