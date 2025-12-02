@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://aslamholidays.com/sitemap.xml
+# If you want to block staging paths, add Disallow rules here
