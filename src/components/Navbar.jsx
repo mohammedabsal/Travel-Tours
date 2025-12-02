@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion as Motion } from "framer-motion";
+import logo from "../assets/favicon.svg";
 
 export default function Navbar() {
   const [scroll, setScroll] = useState(false);
@@ -84,7 +85,7 @@ export default function Navbar() {
         <div className="header-bar flex items-center justify-between w-full py-3 text-emerald-50"
         >
           <div className="flex items-center gap-3 cursor-pointer">
-          <img src="./public/favicon.svg" alt="Aslam Holidays Logo" className="w-10 h-10" />
+          <img src={logo} alt="Aslam Holidays Logo" className="w-10 h-10" />
           <h1 className="text-lg font-bold tracking-tight bg-clip-text text-transparent 
             bg-gradient-to-r from-emerald-300 via-emerald-500 to-emerald-200">
             Aslam Holidays
